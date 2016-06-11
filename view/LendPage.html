@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+      <meta charset="utf-8">
+      <title>AngularJS Routing</title>
+
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+      <link   rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--      <script type="text/javascript" src="app.js"></script> -->
+      <script>
+          
+
+var mainApp = angular.module("mainApp", ['ngRoute']);
+
+// mainApp.config(function($scope,$routeProvider) {
+//     $routeProvider
+//         .when('/home', {
+//             templateUrl: 'main.html',
+//             controller: 'StudentController'
+//         })
+//         .when('/viewStudents', {
+//             templateUrl: 'subject.html',
+//             controller: 'StudentController'
+//         })
+//         .otherwise({
+//             redirectTo: '/home'
+//         });
+// });
+
+mainApp.controller('StudentController', function($scope) {
+    $scope.employee = [
+        {id: 'I061911', name:'Vijay',number:'9036507952',total_amount:'50000',still_needs:'30000',amount_raised:'20000',minimum:'5000',enable:false},
+        {id: 'I061910', name:'Vishal',number:'9036507945',total_amount:'60000',still_needs:'20000',amount_raised:'40000',minimum:'4000',enable:false},
+        {id: 'I061912', name:'Vinay',number:'9036507978',total_amount:'80000',still_needs:'10000',amount_raised:'70000',minimum:'10000',enable:false},
+         {id: 'I061913', name:'Mahesh',number:'9036507952',total_amount:'50000',still_needs:'30000',amount_raised:'20000',minimum:'5000',enable:false},
+          {id: 'I061914', name:'Suresh',number:'9036507952',total_amount:'50000',still_needs:'30000',amount_raised:'20000',minimum:'5000',enable:false},
+           {id: 'I061915', name:'Krishna',number:'9036507952',total_amount:'50000',still_needs:'30000',amount_raised:'20000',minimum:'5000',enable:false},
+            {id: 'I061916', name:'Abhijeet',number:'9036507952',total_amount:'50000',still_needs:'30000',amount_raised:'20000',minimum:'5000',enable:false},
+             {id: 'I061917', name:'Daya',number:'9036507952',total_amount:'50000',still_needs:'30000',amount_raised:'20000',minimum:'5000',enable:false},
+              {id: 'I061918', name:'Vijay',number:'9036507952',total_amount:'50000',still_needs:'30000',amount_raised:'20000',minimum:'5000',enable:false}
+    ];
+
+    $scope.message = "Click on the hyper link to view the students list.";
+
+     $scope.invest= function(post) {
+       post.still_needs = parseInt(post.still_needs) - parseInt(post.minimum);
+        post.amount_raised = parseInt(post.amount_raised) + parseInt(post.minimum);
+    };
+
+    $scope.fulfil=function(post){
+
+      post.minimum = parseInt(post.still_needs);
+      
+                
+    }
+});
+
+      </script>
+
+    </head>
+  
+
+        <body>
+    <div class="container-fluid">
+        
+      <div  class="panel-group" ng-app="mainApp" ng-controller="StudentController">
+          
+          <div class = "well">
+    <h2>Filter Search</h2>
+    <div class="panel-group">
+        <table  class = "table" cellspacing=30>
+        <td>
+        <input  class="form-control" type="text" placeholder="Employee Name/ID" ng-model="user">
+       </td>
+        <td>
+        <input  class="form-control" type="text" placeholder="Minimum Contribution">
+        </td>
+        <td>
+        <!-- <div>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div> -->
+
+         <input class="form-control"  type="date" name="start">
+        </td>
+        <td>
+        
+        <!-- <div>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div> -->
+
+     <input  class="form-control" type="date" name="end">
+    </td>
+    
+
+</table>
+    </div>
+    </div>
+
+
+
+
+      <table class="table">
+<col width="30">
+<col width="90">
+<col width="90">
+<tr ng-repeat ="person in employee | filter : user ">
+<td >
+    <img   class="img-rounded" src="resources/user.jpeg" alt="Note" height="50" width="50" >
+    
+  </td>
+  <td  width="30%" colspan="2">
+   <ul class="list-group">
+       <li class="list-group-item list-group-item-success">{{person.id}}</li>
+  <li class="list-group-item list-group-item-info">{{person.name}}</li>
+  <li class="list-group-item list-group-item-warning">{{person.number}}</li>
+</ul>
+  </td>
+  <td>
+  <table >
+  <tr width="100%">
+  <td width="100px" height="40" colspan="2">
+  <progress   width="100%"  value= {{person.amount_raised}} max={{person.total_amount}} style="width:700px"></progress></progress>
+  <!-- <progress   width="800px"  value=100 max=100></progress> -->
+  </td>
+  </tr>
+
+  <tr>
+  <td height="40">
+
+  <label class="label label-primary" width="75%">Amount Raised:{{person.total_amount - person.still_needs}}</label>
+  </td>
+  <td height="40">
+   <label class="label label-warning" >Still Needs:{{person.still_needs}}</label>
+  </td>
+  </tr>
+
+  <tr>
+  <td>
+
+  <label class="label label-success" width="75%">Total Amount:{{person.total_amount}}</label>
+
+   </td>
+  </tr>
+
+  </table>
+  </td>
+  <td>
+
+  <table class="table table-bordered">
+  <tr width="80%">
+  <td>
+   <input type="text"  class="form-control" ng-model="person.minimum" ng-disabled={{person.enable}}></br>
+   </td>
+</tr>
+
+   <tr width="80%">
+   <td>
+   <input type="button" class="btn btn-default" value="Invest" data-toggle="modal" data-target="#myModal" ng-click="invest(person)"/>
+   </td>
+
+  </tr>
+
+   <tr width="80%">
+   <td>
+  <a  class="btn btn-link" ng-click="fulfil(person)">Fulfil Remaining</a>
+  </td>
+
+  </tr>
+
+  </td>
+</tr>
+</table>
+      
+      </div>
+      
+      
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+      </div>
+
+      
+    </body>
+</html>
+
+
+
+
+
+
+

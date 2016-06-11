@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="helloApp">
+
+<head>
+    <title>Hello AngularJS - Add Table Row Dynamically</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+    <script src="controllers/profileController.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
+</head>
+<!-- Controller name goes here -->
+
+<body ng-controller="CompanyCtrl">
+    
+    <div class="container">
+        <div class = "well well-lg">
+        <h2>Portfolio Summary</h2>
+    </div>
+        
+    <ul class="nav nav-tabs">
+        <li class="active" ng-click="invest_tab()"><a data-toggle="tab" href="#invest">Investments</a></li>
+        <li ng-click="loan_tab()"><a data-toggle="tab" href="#loan">Loans</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="invest" class="tab-pane fade in active">
+            <table class="table">
+                <tr>
+                    <th>Borrower
+                    </th>
+                    <th>Date
+                    </th>
+                    <th>Amount(INR)
+                    </th>
+                    <th>Remaining EMIs
+                    </th>
+                    <th>Amount Received(INR)
+                    </th>
+                    <th>Outstanding Amount(INR)
+                    </th>
+                </tr>
+                <tr ng-repeat="company in companies">
+                    <td>{{company.Borrower}}
+                    </td>
+                    <td>{{company.Date}}
+                    </td>
+                    <td>{{company.Amount}}
+                    </td>
+                    <td>{{company.EMI}}
+                    </td>
+                    <td>{{company.Received}}
+                    </td>
+                    <td>{{company.Outstanding}}
+                    </td>
+                </tr>
+            </table>
+            <div>
+    <div class = "well">
+        <h3>Recent Transactions</h3>
+    </div>
+    <ul class="timeline" id="timeline">
+  <li class="li complete">
+    <div class="timestamp">
+      <span class="author">June 2016</span>
+      <span class="date">3290 INR<span>
+    </div>
+    <div class="status">
+      <h4> Amount Received </h4>
+    </div>
+  </li>
+  <li class="li">
+    <div class="timestamp">
+      <span class="author">July</span>
+      <span class="date">3290 INR<span>
+    </div>
+    <div class="status">
+      <h4> To be received </h4>
+    </div>
+  </li>
+  <li class="li">
+    <div class="timestamp">
+      <span class="author">August 2016</span>
+      <span class="date">4593 INR<span>
+    </div>
+    <div class="status">
+      <h4> To be received </h4>
+    </div>
+  </li>
+  <li class="li">
+    <div class="timestamp">
+      <span class="author">September 2016</span>
+      <span class="date">2387 INR<span>
+    </div>
+    <div class="status">
+      <h4> To be received </h4>
+    </div>
+  </li>
+ </ul>
+    
+</div>
+
+        </div>
+        <div id="loan" class="tab-pane fade">
+            <table class="table">
+                <tr>
+                    <th>Lender
+                    </th>
+                    <th>Date
+                    </th>
+                    <th>Amount(INR)
+                    </th>
+                    <th>Remaining EMIs
+                    </th>
+                    <th>Amount Paid(INR)
+                    </th>
+                    <th>Outstanding Amount
+                    </th>
+                </tr>
+                <tr ng-repeat="company in companies">
+                    <td>{{company.Borrower}}
+                    </td>
+                    <td>{{company.Date}}
+                    </td>
+                    <td>{{company.Amount}}
+                    </td>
+                    <td>{{company.EMI}}
+                    </td>
+                    <td>{{company.Received}}
+                    </td>
+                    <td>{{company.Outstanding}}
+                    </td>
+                </tr>
+            </table>
+        <div>
+    <div class = "well">
+        <h3>Recent Transactions</h3>
+    </div>
+    <ul class="timeline" id="timeline">
+  <li class="li complete">
+    <div class="timestamp">
+      <span class="author">June 2016</span>
+      <span class="date">1276 INR<span>
+    </div>
+    <div class="status">
+      <h4> Amount Paid </h4>
+    </div>
+  </li>
+  <li class="li">
+    <div class="timestamp">
+      <span class="author">July</span>
+      <span class="date">436 INR<span>
+    </div>
+    <div class="status">
+      <h4> To be paid </h4>
+    </div>
+  </li>
+  <li class="li">
+    <div class="timestamp">
+      <span class="author">August 2016</span>
+      <span class="date">5648 INR<span>
+    </div>
+    <div class="status">
+      <h4> To be paid </h4>
+    </div>
+  </li>
+  <li class="li">
+    <div class="timestamp">
+      <span class="author">September 2016</span>
+      <span class="date">1453 INR<span>
+    </div>
+    <div class="status">
+      <h4> To be paid </h4>
+    </div>
+  </li>
+ </ul>
+    
+</div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
